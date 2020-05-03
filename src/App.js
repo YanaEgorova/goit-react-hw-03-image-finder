@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, {
+    Component
+} from 'react';
+import Loader from 'react-loader-spinner';
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
 import ImageGalleryItem from './components/ImageGalleryItem';
@@ -6,7 +9,6 @@ import Notification from './components/Notification';
 import Button from './components/Button';
 import Modal from './components/Modal';
 import imagesApi from './services/imagesApi';
-import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 {
@@ -17,7 +19,6 @@ export default class App extends Component {
     state = {
         images: [],
         loading: false,
-        key: '13248585-0966523de6c8b046532b25512',
         error: null,
         searchQuery: '',
         page: 1,
@@ -46,7 +47,10 @@ export default class App extends Component {
     }
 
     fetchImages = () => {
-        const { searchQuery, page } = this.state;
+        const {
+            searchQuery,
+            page
+        } = this.state;
 
         this.setState({
             loading: true,
@@ -97,40 +101,87 @@ export default class App extends Component {
     };
 
     render() {
-        const { error, loading, images, largeImageURL } = this.state;
+        const {
+            error,
+            loading,
+            images,
+            largeImageURL
+        } = this.state;
 
-        return (
-            <>
-                {largeImageURL && (
-                    <Modal src={largeImageURL} onClose={this.setLargeImage} />
-                )}{' '}
-                <Searchbar onSubmit={this.handleSearchFormSubmit} />{' '}
-                {error && <Notification message={`Wooops ${error.message}`} />}{' '}
-                {images.length > 0 && (
-                    <ImageGallery>
-                        {' '}
-                        {this.state.images.map(image => (
-                            <ImageGalleryItem
-                                key={image.id}
-                                src={image.webformatURL}
-                                srcLargeImage={image.largeImageURL}
-                                onClick={this.setLargeImage}
+        return ( <
+                >
+                {
+                    largeImageURL && ( <
+                        Modal src = {
+                            largeImageURL
+                        }
+                        onClose = {
+                            this.setLargeImage
+                        }
+                        />
+                    )
+                } {
+                    ' '
+                } <
+                Searchbar onSubmit = {
+                    this.handleSearchFormSubmit
+                }
+                />{' '} {
+                error && < Notification message = {
+                    `Wooops ${error.message}`
+                }
+                />}{' '} {
+                images.length > 0 && ( <
+                    ImageGallery > {
+                        ' '
+                    } {
+                        this.state.images.map(image => ( <
+                            ImageGalleryItem key = {
+                                image.id
+                            }
+                            src = {
+                                image.webformatURL
+                            }
+                            srcLargeImage = {
+                                image.largeImageURL
+                            }
+                            onClick = {
+                                this.setLargeImage
+                            }
                             />
-                        ))}{' '}
-                    </ImageGallery>
-                )}{' '}
-                {loading && (
-                    <Loader
-                        type="Bars"
-                        color="#00BFFF"
-                        height={100}
-                        width={100}
+                        ))
+                    } {
+                        ' '
+                    } <
+                    /ImageGallery>
+                )
+            } {
+                ' '
+            } {
+                loading && ( <
+                    Loader type = "Bars"
+                    color = "#00BFFF"
+                    height = {
+                        100
+                    }
+                    width = {
+                        100
+                    }
                     />
-                )}{' '}
-                {images.length > 0 && !loading && (
-                    <Button onClick={this.fetchImages} />
-                )}{' '}
-            </>
-        );
-    }
+                )
+            } {
+                ' '
+            } {
+                images.length > 0 && !loading && ( <
+                    Button onClick = {
+                        this.fetchImages
+                    }
+                    />
+                )
+            } {
+                ' '
+            } <
+            />
+    );
+}
 }
